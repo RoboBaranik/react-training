@@ -1,0 +1,151 @@
+:root {
+  // Analog
+  --clock-size: 200px;
+  --background-color: #111;
+  --clock-background-color: black;
+  --clock-scale-color: #aaa;
+
+  // Digital
+  --digit-background: #111;
+  --digit-color-inactive: #ff000011;
+  --digit-color-active: #ff0000;
+  --digit-height: 200px;
+  --digit-width: 110px;
+  --digit-stick-length: calc(var(--digit-width) - 2 * (var(--digit-stick-width) + var(--digit-stick-margin)));
+  --digit-stick-width: calc(var(--digit-height) / 10);
+  --digit-stick-margin: 2px;
+}
+
+.time-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 48px;
+}
+
+.clock-analog {
+  width: var(--clock-size);
+  height: var(--clock-size);
+  background-color: var(--background-color);
+  background: radial-gradient(var(--clock-background-color) 0%, var(--clock-background-color) 59%, transparent 60%),
+    repeating-conic-gradient(
+      var(--clock-scale-color) 0deg 1deg,
+      var(--clock-background-color) 2deg 28deg,
+
+      var(--clock-scale-color) 29deg 31deg,
+      var(--clock-background-color) 32deg 58deg,
+
+      var(--clock-scale-color) 59deg 61deg,
+      var(--clock-background-color) 62deg 88deg,
+
+      var(--clock-scale-color) 89deg 91deg,
+      var(--clock-background-color) 92deg 118deg,
+
+      var(--clock-scale-color) 119deg 121deg,
+      var(--clock-background-color) 122deg 148deg,
+
+      var(--clock-scale-color) 149deg 151deg,
+      var(--clock-background-color) 152deg 178deg,
+
+      var(--clock-scale-color) 179deg 181deg,
+      var(--clock-background-color) 182deg 208deg,
+
+      var(--clock-scale-color) 209deg 211deg,
+      var(--clock-background-color) 212deg 238deg,
+
+      var(--clock-scale-color) 239deg 241deg,
+      var(--clock-background-color) 242deg 268deg,
+
+      var(--clock-scale-color) 269deg 271deg,
+      var(--clock-background-color) 272deg 298deg,
+
+      var(--clock-scale-color) 299deg 301deg,
+      var(--clock-background-color) 302deg 328deg,
+
+      var(--clock-scale-color) 329deg 331deg,
+      var(--clock-background-color) 332deg 358deg,
+      var(--clock-scale-color) 359deg
+    );
+  position: relative;
+  border-radius: 100%;
+  border: 10px solid white;
+  box-sizing: content-box;
+  .clock-analog-handle {
+    position: absolute;
+    height: calc(var(--clock-size) / 2);
+    box-shadow: 0 0 5px white;
+  }
+  .seconds {
+    width: 2px;
+    background-color: #ff0000;
+    left: calc(var(--clock-size) / 2 - 1px);
+    z-index: 3;
+  }
+  .minutes {
+    width: 4px;
+    background-color: white;
+    left: calc(var(--clock-size) / 2 - 2px);
+    z-index: 1;
+  }
+  .hours {
+    width: 6px;
+    height: calc(var(--clock-size) / 4);
+    background-color: #ff5555;
+    top: calc(var(--clock-size) / 4);
+    left: calc(var(--clock-size) / 2 - 3px);
+    z-index: 1;
+  }
+  .joint {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    position: absolute;
+    top: calc(var(--clock-size) / 2 - 6px);
+    left: calc(var(--clock-size) / 2 - 6px);
+    z-index: 4;
+    border-radius: 100%;
+  }
+}
+
+.clock-digital {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--digit-background);
+  width: min-content;
+  box-shadow: 0 0 20px var(--digit-background);
+}
+
+@keyframes separatorBlink {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.separator {
+  height: var(--digit-height);
+  display: block;
+  position: relative;
+  width: calc(var(--digit-width) / 2);
+}
+
+.separator::before {
+  content: ':';
+  font-size: calc(var(--digit-height));
+  color: var(--digit-color-active);
+  position: absolute;
+  top: 0;
+  line-height: calc(var(--digit-height) / 1.2);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  animation-name: separatorBlink;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
