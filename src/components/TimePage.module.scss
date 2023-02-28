@@ -1,6 +1,6 @@
 :root {
   // Analog
-  --clock-size: 200px;
+  --clock-size: 300px;
   --background-color: #111;
   --clock-background-color: black;
   --clock-scale-color: #aaa;
@@ -28,7 +28,7 @@
   width: var(--clock-size);
   height: var(--clock-size);
   background-color: var(--background-color);
-  background: radial-gradient(var(--clock-background-color) 0%, var(--clock-background-color) 59%, transparent 60%),
+  background: radial-gradient(var(--clock-background-color) 0%, var(--clock-background-color) 62%, transparent 63%),
     repeating-conic-gradient(
       var(--clock-scale-color) 0deg 1deg,
       var(--clock-background-color) 2deg 28deg,
@@ -71,31 +71,6 @@
   border-radius: 100%;
   border: 10px solid white;
   box-sizing: content-box;
-  .clock-analog-handle {
-    position: absolute;
-    height: calc(var(--clock-size) / 2);
-    box-shadow: 0 0 5px white;
-  }
-  .seconds {
-    width: 2px;
-    background-color: #ff0000;
-    left: calc(var(--clock-size) / 2 - 1px);
-    z-index: 3;
-  }
-  .minutes {
-    width: 4px;
-    background-color: white;
-    left: calc(var(--clock-size) / 2 - 2px);
-    z-index: 1;
-  }
-  .hours {
-    width: 6px;
-    height: calc(var(--clock-size) / 4);
-    background-color: #ff5555;
-    top: calc(var(--clock-size) / 4);
-    left: calc(var(--clock-size) / 2 - 3px);
-    z-index: 1;
-  }
   .joint {
     width: 12px;
     height: 12px;

@@ -1,14 +1,3 @@
-// :root {
-//   --digit-background: #111;
-//   --digit-color-inactive: #ff000011;
-//   --digit-color-active: #ff0000;
-//   --digit-height: 200px;
-//   --digit-width: 110px;
-//   --digit-stick-length: calc(var(--digit-width) - 2 * (var(--digit-stick-width) + var(--digit-stick-margin)));
-//   --digit-stick-width: calc(var(--digit-height) / 10);
-//   --digit-stick-margin: 2px;
-// }
-
 .digit {
   position: relative;
   background-color: var(--digit-background);
@@ -104,23 +93,4 @@
       bottom: 0;
     }
   }
-  // &[data-digit='0'],
-  // &[data-digit='2'],
-  // &[data-digit='3'],
-  // &[data-digit='5'],
-  // &[data-digit='6'],
-  // &[data-digit='7'],
-  // &[data-digit='8'],
-  // &[data-digit='9'] {
-  //   > span:nth-child(1) {
-  //     background-color: var(--digit-color-active);
-  //     box-shadow: 0 0 16px var(--digit-color-active);
-  //     &::before {
-  //       border-right: calc(var(--digit-stick-width) / 2) solid var(--digit-color-active);
-  //     }
-  //     &::after {
-  //       border-left: calc(var(--digit-stick-width) / 2) solid var(--digit-color-active);
-  //     }
-  //   }
-  // }
 }

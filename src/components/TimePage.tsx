@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { ClockHand, ClockHandType } from './ClockHand';
+import ClockLabel from './ClockLabel';
 import Digit from './Digit';
 import styles from './TimePage.module.scss';
+
 function TimePage() {
   const [time, setTime] = useState(new Date());
   const [seconds, setSeconds] = useState(time.getSeconds() * 10);
@@ -11,43 +14,14 @@ function TimePage() {
   const timer = () => {
     const currentTime = new Date();
     setTime(currentTime);
-    // console.log(currentTime.toISOString());
-    setSeconds(currentTime.getSeconds() * 10 + Math.ceil((currentTime.getMilliseconds() / 1000) * 10));
-    setMinutes(currentTime.getMinutes() * 10 + Math.ceil((currentTime.getSeconds() / 60) * 10));
-    setHours(
-      currentTime.getHours() * 10 +
-        Math.ceil((currentTime.getMinutes() / 60) * 10) +
-        Math.ceil((currentTime.getSeconds() / 3600) * 10)
-    );
-    // setSeconds((s) => s + 1);
-    // setSeconds((s) => {
-    //   if (s % 60 === 0)
-    //     setMinutes((m) => {
-    //       if (m % 60 === 0) setHours((h) => (h < 6000 ? h + 1 : 0));
-    //       return m < 6000 ? m + 1 : 0;
-    //     });
-    //   return s < 6000 ? s + 1 : 0;
-    // });
+    const timeSeconds = currentTime.getSeconds() * 10 + Math.ceil((currentTime.getMilliseconds() / 1000) * 10);
+    const timeMinutes = currentTime.getMinutes() * 10 + Math.ceil(timeSeconds / 60);
+    const timeHours = currentTime.getHours() * 10 + Math.ceil(timeMinutes / 60);
+    setSeconds(timeSeconds);
+    setMinutes(timeMinutes);
+    setHours(timeHours);
   };
-  // setInterval(() => {
-  //   setSeconds((s) => {
-  //     if (s % 60 === 0)
-  //       setMinutes((m) => {
-  //         if (m % 60 === 0) setHours((h) => (h < 6000 ? h + 1 : 0));
-  //         return m < 6000 ? m + 1 : 0;
-  //       });
-  //     return s < 6000 ? s + 1 : 0;
-  //   });
-  // }, 10);
   useEffect(() => {
-    // if (seconds % 60 === 0)
-    //   setMinutes((m) => {
-    //     if (m % 60 === 0) setHours((h) => (h < 600 ? h + 1 : 0));
-    //     return m < 600 ? m + 1 : 0;
-    //   });
-    // if (seconds >= 600) {
-    //   setSeconds(0);
-    // }
     const id = setInterval(timer, 20);
     return () => clearInterval(id);
   }, [seconds]);
@@ -55,21 +29,14 @@ function TimePage() {
     <div className={styles['time-page']}>
       <h1 className={styles['time-string']}>Real time: {time.toLocaleTimeString()}</h1>
       <div className={styles['clock-analog']}>
-        <div
-          style={{ transform: `translateY(50%) rotate(${(360 / 600) * seconds}deg) translateY(-50%)` }}
-          className={`${styles['clock-analog-handle']} ${styles.seconds}`}
-          data-value={seconds}
-        ></div>
-        <div
-          style={{ transform: `translateY(50%) rotate(${(360 / 600) * minutes}deg) translateY(-50%)` }}
-          className={`${styles['clock-analog-handle']} ${styles.minutes}`}
-          data-value={minutes}
-        ></div>
-        <div
-          style={{ transform: `translateY(50%) rotate(${(360 / 600) * hours}deg) translateY(-50%)` }}
-          className={`${styles['clock-analog-handle']} ${styles.hours}`}
-          data-value={hours}
-        ></div>
+        {Array(12)
+          .fill(0)
+          .map((label, index) => (
+            <ClockLabel labelName={(index + 1).toString()} />
+          ))}
+        <ClockHand type={ClockHandType.Second} timeValue={seconds - 1} />
+        <ClockHand type={ClockHandType.Minute} timeValue={minutes - 1} />
+        <ClockHand type={ClockHandType.Hour} timeValue={hours - 1} />
         <div className={styles.joint}></div>
       </div>
       <div className={styles['clock-digital']}>

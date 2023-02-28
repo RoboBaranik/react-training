@@ -1,0 +1,25 @@
+.clockHand {
+  position: absolute;
+  height: calc(var(--clock-size) / 2);
+  box-shadow: 0 0 5px white;
+}
+.second {
+  width: 2px;
+  background-color: #ff0000;
+  left: calc(var(--clock-size) / 2 - 1px);
+  z-index: 3;
+}
+.minute {
+  width: 4px;
+  background-color: white;
+  left: calc(var(--clock-size) / 2 - 2px);
+  z-index: 1;
+}
+.hour {
+  width: 6px;
+  height: calc(var(--clock-size) / 4);
+  background-color: #ff5555;
+  top: calc(var(--clock-size) / 4);
+  left: calc(var(--clock-size) / 2 - 3px);
+  z-index: 1;
+}
